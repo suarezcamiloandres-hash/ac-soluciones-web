@@ -73,12 +73,58 @@ def scene_matrix(check):
             '<p class="mx-foot pop" style="--i:22">Se documenta una vez y se usa en todas las normas</p></div></div></div>')
 
 
-def story_section(icon, check):
+def _compose(steps, scenes):
     copies = "".join(
         f'<div class="step-copy{" on" if i == 0 else ""}" data-scene="{i}"><span class="eyebrow">{e}</span>'
         f'<h2 class="title">{h}</h2><p class="lead">{p}</p><a class="tlink" href="{href}">{label} →</a></div>'
-        for i, (e, h, p, label, href) in enumerate(STEPS))
-    dots = "".join(f'<i class="{"on" if i == 0 else ""}"></i>' for i in range(len(STEPS)))
+        for i, (e, h, p, label, href) in enumerate(steps))
+    dots = "".join(f'<i class="{"on" if i == 0 else ""}"></i>' for i in range(len(steps)))
     return (f'<section class="story" id="story"><div class="container"><div class="story-grid"><div class="story-steps">{copies}</div>'
             f'<div class="story-panel" data-scroll data-scroll-sticky data-scroll-target="#story"><span class="ex">Ejemplo ilustrativo</span>'
-            f'{scene_hub(icon)}{scene_dash()}{scene_matrix(check)}<div class="sdots">{dots}</div></div></div></div></section>')
+            f'{scenes}<div class="sdots">{dots}</div></div></div></div></section>')
+
+
+def story_section(icon, check):
+    return _compose(STEPS, scene_hub(icon) + scene_dash() + scene_matrix(check))
+
+
+# ---------------- versión para páginas de servicio ----------------
+CHECK_PATTERN = ["ok", "ok", "warn", "warn", "bad", "bad"]
+
+
+def scene_checklist(items):
+    rows = "".join(
+        f'<li class="cl {CHECK_PATTERN[i % len(CHECK_PATTERN)]} pop" style="--i:{i + 1}"><i></i><span>{t}</span><em>{STATUS[CHECK_PATTERN[i % len(CHECK_PATTERN)]]}</em></li>'
+        for i, t in enumerate(items))
+    return ('<div class="scene s0 on" data-i="0"><div class="stage"><div class="checklist">'
+            f'<div class="cl-top pop" style="--i:0"><small>Avance por componente</small><b>{len(items)} componentes</b></div>'
+            f'<ul>{rows}</ul></div></div></div>')
+
+
+def scene_matrix_hl(check, hl):
+    """Tabla de normas con la columna de la norma de la página resaltada."""
+    html = scene_matrix(check)
+    parts = html.split('<i class="ck pop"')
+    out = [parts[0]]
+    for n, part in enumerate(parts[1:]):
+        out.append(('<i class="ck pop hl"' if n % len(MATRIX_COLS) == hl else '<i class="ck pop"') + part)
+    html = "".join(out)
+    heads = html.split("<b>")
+    return heads[0] + "".join(('<b class="hl">' if i == hl else "<b>") + h for i, h in enumerate(heads[1:]))
+
+
+def service_story(x, hl, icon, check):
+    tag = x["tag"]
+    steps = [
+        ("Qué se trabaja", f"Cada componente de {tag}, con su avance visible",
+         "Dividimos el sistema en los componentes que pide la norma y los avanzamos uno a uno, para que sepa qué ya está, qué está en curso y qué necesita atención.",
+         "Solicitar diagnóstico", "contacto.html"),
+        ("Plan de trabajo", "Un entregable verificable en cada etapa",
+         "Levantamiento, diagnóstico, documentación, capacitación y auditoría. Al cierre de cada etapa recibe un entregable que puede revisar con su equipo.",
+         "Conozca el método", "como-trabajamos.html"),
+        ("Un solo sistema", f"{tag} se integra con las demás normas",
+         f"Como las normas ISO de sistemas de gestión comparten una estructura común, lo que construye para {tag} se reutiliza si más adelante suma otra: política, riesgos, auditoría interna y revisión por la dirección.",
+         "Ver todos los servicios", "servicios.html"),
+    ]
+    scenes = scene_checklist(x["incluye"][:6]) + scene_dash() + scene_matrix_hl(check, hl)
+    return _compose(steps, scenes)

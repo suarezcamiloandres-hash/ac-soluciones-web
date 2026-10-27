@@ -23,7 +23,7 @@ shutil.rmtree(OUT, ignore_errors=True)
 shutil.copytree(ROOT / "assets", OUT / "assets")
 from services_content import SVC, GROUPS  # noqa: E402
 from blog_content import ARTICLES, CATS  # noqa: E402
-from story import story_section  # noqa: E402
+from story import story_section, service_story  # noqa: E402
 
 SITE = "https://acsgi.com.mx"
 TODAY = "2026-10-27"
@@ -218,6 +218,7 @@ def group_sections():
 CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>'
 STORY = story_section(ICON, CHECK_SVG)
 STORY_CSS = '<link rel="stylesheet" href="assets/story.css">'
+STORY_SERVICES = {"iso-9001": 0, "iso-14001": 1, "iso-27001": 2, "iso-42001": 3}  # columna de la norma que se resalta
 
 index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, implementamos y auditamos sistemas de calidad, ambiente, buenas prácticas, ciberseguridad e inteligencia artificial.", "", [ORG], css=STORY_CSS) + navbar("index.html") + f'''
 <section class="hero"><canvas data-net></canvas><div class="container"><div>
@@ -308,16 +309,23 @@ def service_page(x):
     inc = "".join(f'<li class="reveal d{(i % 3) + 1}">{CHECK}<span>{t}</span></li>' for i, t in enumerate(x["incluye"]))
     faq = "".join(f'<details class="faq reveal"><summary>{q}</summary><div class="ans"><p>{a}</p></div></details>' for q, a in x["faqs"])
     rel = "".join(f'<a class="rel reveal d{i+1}" href="servicios/{y}.html"><span class="ico">{ICON[by[y]["icon"]]}</span><span class="tag">{by[y]["tag"]}</span><b>{by[y]["name"]}</b><span class="go">Ver servicio →</span></a>' for i, y in enumerate(x["related"]))
+    default_how = (f'<section><div class="container"><span class="eyebrow reveal">Cómo trabajamos</span><h2 class="title reveal d1">Cinco etapas, un entregable verificable en cada una</h2>{steps()}'
+                   '<p class="lead reveal" style="margin-top:34px">Con o sin certificación: usted decide hasta dónde llevar el sistema. <a class="tlink" href="como-trabajamos.html">Conozca el método completo</a>.</p></div></section>')
+    if x["slug"] in STORY_SERVICES:
+        how = service_story(x, STORY_SERVICES[x["slug"]], ICON, CHECK) + (
+            '<section style="padding:20px 0 0"><div class="container"><p class="lead reveal">Con o sin certificación: usted decide hasta dónde llevar el sistema. '
+            '<a class="tlink" href="como-trabajamos.html">Conozca el método completo</a>.</p></div></section>')
+    else:
+        how = default_how
     body = f'''
 <section><div class="container two"><div><span class="eyebrow reveal">Qué es</span><h2 class="title reveal d1">{x.get("que_h2") or "¿Qué es " + x["tag"] + " y por qué importa?"}</h2><div class="prose reveal d2">{que}</div></div>
 <aside class="card reveal right"><span class="tag">¿Para quién es?</span><ul class="checks">{para}</ul></aside></div></section>
 <section style="background:#fff"><div class="container"><span class="eyebrow reveal">Qué incluye</span><h2 class="title reveal d1">{x.get("inc_h2") or "Lo que incluye el servicio de " + (x["name"].lower() if x["slug"] != "bpad" else "BPAD")}</h2>
 <ul class="checks grid2">{inc}</ul></div></section>
-<section><div class="container"><span class="eyebrow reveal">Cómo trabajamos</span><h2 class="title reveal d1">Cinco etapas, un entregable verificable en cada una</h2>{steps()}
-<p class="lead reveal" style="margin-top:34px">Con o sin certificación: usted decide hasta dónde llevar el sistema. <a class="tlink" href="como-trabajamos.html">Conozca el método completo</a>.</p></div></section>
+{how}
 <section style="background:#fff"><div class="container narrow"><span class="eyebrow reveal">Preguntas frecuentes</span><h2 class="title reveal d1">{x.get("faq_h2") or "Preguntas frecuentes sobre " + x["tag"]}</h2><div class="faqs">{faq}</div></div></section>
 <section><div class="container"><span class="eyebrow reveal">Servicios relacionados</span><h2 class="title reveal d1">También le puede interesar</h2><div class="grid-3 rels">{rel}</div></div></section>'''
-    html = head(x["title"], esc(x["desc"]), f'servicios/{x["slug"]}.html', schema) + navbar("servicios.html") + hero + body + cta() + footer()
+    html = head(x["title"], esc(x["desc"]), f'servicios/{x["slug"]}.html', schema, css=STORY_CSS if x["slug"] in STORY_SERVICES else "") + navbar("servicios.html") + hero + body + cta() + footer()
     # estas páginas viven en /servicios/: las rutas hacia la raíz llevan "../"
     return re.sub(r'(href|src)="(?!https?:|tel:|mailto:|#|\.\./|servicios/)', r'\1="../', html).replace('href="servicios/', 'href="../servicios/')
 

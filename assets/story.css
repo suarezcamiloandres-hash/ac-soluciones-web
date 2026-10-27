@@ -60,6 +60,22 @@
 .ck svg{width:14px;height:14px}
 .mx-foot{margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--navy);color:#fff;font:600 .8rem Sora,sans-serif;text-align:center}
 
+/* componentes con estado (páginas de servicio) */
+.checklist{width:470px;background:#fff;border-radius:22px;padding:22px 24px;box-shadow:0 24px 50px -24px rgba(10,22,40,.4)}
+.cl-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.cl-top small{font:600 .72rem Sora,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cl-top b{font:700 .95rem Sora,sans-serif;color:var(--ink)}
+.checklist ul{list-style:none;display:grid;gap:8px}
+.cl{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;background:#f5f9fc;font-size:.84rem;line-height:1.3;color:var(--ink);font-weight:500}
+.cl i{width:11px;height:11px;border-radius:50%;flex:none}
+.cl span{flex:1}
+.cl em{flex:none;font:600 .68rem Inter,sans-serif;font-style:normal;padding:3px 10px;border-radius:99px;background:#fff}
+.cl.ok i{background:#16a34a}.cl.ok em{color:#15803d}
+.cl.warn i{background:#f59e0b}.cl.warn em{color:#b45309}
+.cl.bad i{background:#ef4444}.cl.bad em{color:#b91c1c}
+.mx-head b.hl{color:#fff;background:var(--navy);border-radius:8px;padding:3px 0}
+.ck.hl{background:var(--teal);color:#fff}
+
 @media(max-width:980px){
   .story{padding-top:40px}
   .story-grid{grid-template-columns:1fr;gap:0}
