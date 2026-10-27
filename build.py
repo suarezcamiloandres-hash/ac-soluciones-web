@@ -41,6 +41,8 @@ ICON = {
  "lock": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>',
  "db": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>',
  "med": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
+ "shield": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+ "chip": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/><path d="M10 12l1.5 1.5L14 10.5"/></svg>',
  "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>',
 }
 
@@ -49,6 +51,8 @@ SERVICES = [
  ("leaf", "ISO 14001", "Gestión ambiental", "Identificación de aspectos e impactos ambientales, requisitos legales aplicables, objetivos ambientales y control operacional de residuos y emisiones.", ["Matriz de aspectos", "Cumplimiento legal", "Integración con ISO 9001"]),
  ("box", "BPAD", "Buenas Prácticas de Almacenamiento y Distribución", "Cumplimiento de la NOM-059-SSA1-2015 en lo aplicable: procedimientos de transporte, control de temperatura y humedad, calibración de termohigrómetros, contratos de servicio y evaluación de proveedores.", ["Procedimientos", "Auditorías de clientes", "Cadena seca"]),
  ("med", "FEUM 7.0", "Suplemento de la Farmacopea", "Requisitos del Suplemento de la FEUM 7.0 para boticas, droguerías, farmacias y almacenes de depósito y distribución: procedimientos normalizados, control de existencias, manejo y almacenamiento, y auditorías.", ["Procedimientos normalizados", "Control de existencias", "Almacenamiento"]),
+ ("shield", "Cumplimiento regulatorio", "COFEPRIS, INVIMA, ANVISA, FDA y Panamá", "Sistemas de gestión de calidad, procedimientos y auditorías que cumplen los requisitos de COFEPRIS (México), INVIMA (Colombia), el Ministerio de Salud de Panamá, ANVISA (Brasil) y la FDA (Estados Unidos).", ["COFEPRIS", "INVIMA", "ANVISA", "FDA", "Panamá"]),
+ ("chip", "Validación de software", "Sistemas computarizados (GAMP 5 y 21 CFR Part 11)", "Validación de sistemas computarizados en entornos regulados: plan, requerimientos, evaluación de riesgos, IQ/OQ/PQ, trazabilidad e integridad de datos.", ["Plan de validación", "IQ / OQ / PQ", "Integridad de datos"]),
  ("cap", "Formación", "Capacitación", "Cursos de interpretación de normas, formación de auditores internos, BPD, BPAD, seguridad de la información, uso responsable de la IA y capacitación en los procedimientos de su empresa, presenciales o en línea.", ["Constancias DC-3", "Grupos a la medida"]),
  ("search", "Consultoría", "Asesoría y consultoría", "Diagnósticos de brechas, auditorías internas y de segunda parte, evaluaciones de riesgos de ciberseguridad y de IA, preparación para auditorías de clientes y de la autoridad, y atención de hallazgos.", ["Auditorías", "Planes de acción", "Seguimiento"]),
  ("ai", "ISO/IEC 42001", "Inteligencia artificial", "Sistema de gestión para el uso responsable de la inteligencia artificial: inventario de usos de IA, evaluación de riesgos e impactos, controles, supervisión humana y políticas para el personal.", ["Política de IA", "Evaluación de impacto", "Controles"]),
@@ -92,7 +96,7 @@ ORG = {"@context": "https://schema.org", "@type": "ProfessionalService", "name":
        "url": SITE + "/", "logo": SITE + "/assets/logo.svg", "telephone": PHONES, "email": "contacto@acsgi.com.mx",
        "description": "Diseñamos, implementamos y auditamos sistemas de calidad, ambiente, buenas prácticas, ciberseguridad e inteligencia artificial.",
        "areaServed": ["México", "Latinoamérica"],
-       "knowsAbout": ["ISO 9001", "ISO 14001", "ISO/IEC 27001", "ISO/IEC 42001", "NOM-059-SSA1-2015", "Suplemento FEUM 7.0", "ISO/IEC 27701", "ISO/IEC 38505"]}
+       "knowsAbout": ["ISO 9001", "ISO 14001", "ISO/IEC 27001", "ISO/IEC 42001", "NOM-059-SSA1-2015", "Suplemento FEUM 7.0", "COFEPRIS", "INVIMA", "ANVISA", "FDA 21 CFR Part 11", "GAMP 5", "ISO/IEC 27701", "ISO/IEC 38505"]}
 
 
 def head(title, desc, path=None, schema=None, og="website", css=""):
@@ -134,7 +138,7 @@ def cta():
 def footer():
     nav = "".join(f'<a href="{h}">{n}</a>' for h, n in PAGES)
     ph = "".join(f'<a href="tel:{p.replace(" ", "")}">{p}</a>' for p in PHONES)
-    svc_links = "".join(f'<a href="servicios/{x["slug"]}.html">{x["tag"] if x["slug"] in ("iso-9001", "iso-14001", "iso-27001", "iso-42001", "bpad", "farmacopea-feum") else x["name"]}</a>' for x in SVC)
+    svc_links = "".join(f'<a href="servicios/{x["slug"]}.html">{x["tag"] if x["slug"] in ("iso-9001", "iso-14001", "iso-27001", "iso-42001", "bpad", "farmacopea-feum", "cumplimiento-regulatorio", "validacion-software") else x["name"]}</a>' for x in SVC)
     return f'''<footer><div class="container"><div class="foot">
 <div><a class="logo" href="index.html"><span class="logo-mark"><img src="assets/logo.svg" alt="AC"></span><span>AC Soluciones</span></a>
 <p style="margin-top:18px;max-width:300px">Sistemas de gestión que funcionan en la operación, no solo en el papel.</p></div>
@@ -174,7 +178,7 @@ cycle = '''<div data-scroll data-scroll-speed="-2"><div class="cycle reveal zoom
 <div class="cycle-center"><div><b>Mejora<br>continua</b><span>PHVA</span></div></div>
 <span class="cyc-label p">Planear</span><span class="cyc-label h">Hacer</span><span class="cyc-label v">Verificar</span><span class="cyc-label a">Actuar</span></div></div>'''
 
-norms = ["ISO 9001", "ISO 14001", "BPAD", "FEUM 7.0", "ISO/IEC 27001", "ISO/IEC 42001", "NOM-059-SSA1-2015", "ISO/IEC 27701", "ISO/IEC 38505"]
+norms = ["ISO 9001", "ISO 14001", "BPAD", "FEUM 7.0", "COFEPRIS", "INVIMA", "ANVISA", "FDA", "GAMP 5", "ISO/IEC 27001", "ISO/IEC 42001", "NOM-059-SSA1-2015", "ISO/IEC 27701", "ISO/IEC 38505"]
 mq = "".join(f"<span>{n}</span>" for n in norms) * 2
 
 index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, implementamos y auditamos sistemas de calidad, ambiente, buenas prácticas, ciberseguridad e inteligencia artificial.", "", [ORG]) + navbar("index.html") + f'''
@@ -187,7 +191,7 @@ index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, impl
 <div class="marquee"><div class="marquee-track">{mq}</div></div>
 <section class="stats"><div class="container"><div class="stat-grid">
 <div class="stat reveal d1"><b data-count="16" data-pre="+">0</b><span>años de experiencia</span></div>
-<div class="stat reveal d2"><b data-count="9">0</b><span>líneas de servicio</span></div>
+<div class="stat reveal d2"><b data-count="11">0</b><span>líneas de servicio</span></div>
 <div class="stat reveal d3"><b data-count="5">0</b><span>etapas con entregable</span></div>
 <div class="stat reveal d4"><b data-count="1" data-suf=" día">0</b><span>hábil de respuesta</span></div></div></div></section>
 <section><div class="container"><div class="band reveal zoom"><div class="big" data-scroll data-scroll-speed="2">+16<small>años de experiencia</small></div>
@@ -196,7 +200,7 @@ index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, impl
 <h2 class="title reveal d1">Un solo equipo para calidad, ambiente, buenas prácticas y tecnología</h2>
 <p class="lead reveal d2">Integramos las normas en un sistema que su personal entiende y usa todos los días, con o sin certificación.</p>
 <div class="grid-3">{"".join(card(i, s) for i, s in enumerate(SERVICES[:6]))}</div>
-<div style="text-align:center;margin-top:50px" class="reveal"><a class="btn btn-dark" href="servicios.html">Ver los 9 servicios <span class="arr">→</span></a></div></div></section>
+<div style="text-align:center;margin-top:50px" class="reveal"><a class="btn btn-dark" href="servicios.html">Ver los 11 servicios <span class="arr">→</span></a></div></div></section>
 <section style="background:#fff;overflow:hidden"><div class="ghost r" data-scroll data-scroll-speed="3" aria-hidden="true">PHVA</div><div class="container"><span class="eyebrow reveal">Cómo trabajamos</span>
 <h2 class="title reveal d1">Cinco etapas, un entregable verificable en cada una</h2>{steps()}</div></section>
 {cta()}''' + footer()
@@ -266,13 +270,13 @@ def service_page(x):
     faq = "".join(f'<details class="faq reveal"><summary>{q}</summary><div class="ans"><p>{a}</p></div></details>' for q, a in x["faqs"])
     rel = "".join(f'<a class="rel reveal d{i+1}" href="servicios/{y}.html"><span class="ico">{ICON[by[y]["icon"]]}</span><span class="tag">{by[y]["tag"]}</span><b>{by[y]["name"]}</b><span class="go">Ver servicio →</span></a>' for i, y in enumerate(x["related"]))
     body = f'''
-<section><div class="container two"><div><span class="eyebrow reveal">Qué es</span><h2 class="title reveal d1">¿Qué es {x["tag"]} y por qué importa?</h2><div class="prose reveal d2">{que}</div></div>
+<section><div class="container two"><div><span class="eyebrow reveal">Qué es</span><h2 class="title reveal d1">{x.get("que_h2") or "¿Qué es " + x["tag"] + " y por qué importa?"}</h2><div class="prose reveal d2">{que}</div></div>
 <aside class="card reveal right"><span class="tag">¿Para quién es?</span><ul class="checks">{para}</ul></aside></div></section>
-<section style="background:#fff"><div class="container"><span class="eyebrow reveal">Qué incluye</span><h2 class="title reveal d1">Lo que incluye el servicio de {x["name"].lower() if x["slug"] != "bpad" else "BPAD"}</h2>
+<section style="background:#fff"><div class="container"><span class="eyebrow reveal">Qué incluye</span><h2 class="title reveal d1">{x.get("inc_h2") or "Lo que incluye el servicio de " + (x["name"].lower() if x["slug"] != "bpad" else "BPAD")}</h2>
 <ul class="checks grid2">{inc}</ul></div></section>
 <section><div class="container"><span class="eyebrow reveal">Cómo trabajamos</span><h2 class="title reveal d1">Cinco etapas, un entregable verificable en cada una</h2>{steps()}
 <p class="lead reveal" style="margin-top:34px">Con o sin certificación: usted decide hasta dónde llevar el sistema. <a class="tlink" href="como-trabajamos.html">Conozca el método completo</a>.</p></div></section>
-<section style="background:#fff"><div class="container narrow"><span class="eyebrow reveal">Preguntas frecuentes</span><h2 class="title reveal d1">Preguntas frecuentes sobre {x["tag"]}</h2><div class="faqs">{faq}</div></div></section>
+<section style="background:#fff"><div class="container narrow"><span class="eyebrow reveal">Preguntas frecuentes</span><h2 class="title reveal d1">{x.get("faq_h2") or "Preguntas frecuentes sobre " + x["tag"]}</h2><div class="faqs">{faq}</div></div></section>
 <section><div class="container"><span class="eyebrow reveal">Servicios relacionados</span><h2 class="title reveal d1">También le puede interesar</h2><div class="grid-3 rels">{rel}</div></div></section>'''
     html = head(x["title"], esc(x["desc"]), f'servicios/{x["slug"]}.html', schema) + navbar("servicios.html") + hero + body + cta() + footer()
     # estas páginas viven en /servicios/: las rutas hacia la raíz llevan "../"
