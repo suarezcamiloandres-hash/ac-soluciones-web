@@ -70,7 +70,35 @@ SVC = [
    ("¿Cómo sé qué partes de la NOM-059 me aplican?", "Depende de la actividad de su empresa: almacenar, distribuir o transportar. El diagnóstico inicial define qué requisitos aplican en su caso, y con eso se arma el plan."),
    ("¿Se preparan también las auditorías de clientes?", "Sí. Revisamos con anticipación procedimientos, registros y evidencias, y atendemos los hallazgos que resulten."),
   ],
-  related=["iso-9001", "capacitacion", "consultoria"]),
+  related=["farmacopea-feum", "iso-9001", "capacitacion"]),
+
+ dict(
+  slug="farmacopea-feum", icon="med", tag="FEUM 7.0", name="Suplemento de la Farmacopea",
+  title="Suplemento FEUM 7.0: farmacias y almacenes | AC Soluciones",
+  h1="Suplemento de la FEUM 7.0: cumplimiento para farmacias, droguerías y almacenes",
+  desc="Implementamos el Suplemento de la FEUM 7.0 en farmacias, droguerías, boticas y almacenes de distribución: procedimientos, existencias, almacenamiento y auditorías.",
+  intro="Le ayudamos a aplicar el Suplemento de la Farmacopea en su establecimiento: procedimientos normalizados, control de existencias y almacenamiento que su personal sigue todos los días y que usted puede demostrar en una verificación.",
+  que_es=[
+   "El Suplemento para establecimientos dedicados a la venta y suministro de medicamentos, dispositivos médicos y demás insumos para la salud es una publicación de la Farmacopea de los Estados Unidos Mexicanos (FEUM), editada por la Comisión Permanente de la Farmacopea. Establece las especificaciones y los requisitos para las actividades de manejo, distribución y dispensación en boticas, droguerías, farmacias y almacenes de depósito y distribución.",
+   "La edición 7.0 reorganiza y actualiza capítulos de la sexta edición. Según el aviso de la COFEPRIS publicado en el Diario Oficial de la Federación el 27 de noviembre de 2025, entra en vigor a los 60 días naturales posteriores a esa publicación.",
+   "Nuestro trabajo es traducir esos requisitos a procedimientos, responsables y registros de su operación diaria."],
+  para=["Farmacias, incluida la farmacia hospitalaria, droguerías y boticas.",
+        "Almacenes de depósito y distribución de medicamentos, dispositivos médicos y remedios herbolarios.",
+        "Empresas de la industria farmacéutica que evalúan a sus distribuidores y puntos de venta.",
+        "Establecimientos que quieren actualizar su operación a la edición 7.0."],
+  incluye=["Diagnóstico frente a los requisitos del Suplemento 7.0", "Requisitos de operación de boticas, droguerías y farmacias",
+           "Requisitos de operación de almacenes de depósito y distribución", "Procedimientos normalizados de operación",
+           "Control de existencias", "Manejo y almacenamiento de medicamentos, dispositivos médicos y demás insumos",
+           "Control de receta médica, estupefacientes, psicotrópicos y antimicrobianos, según aplique",
+           "Gestión de residuos de fármacos, medicamentos y dispositivos médicos", "Auditorías internas y capacitación del personal"],
+  faqs=[
+   ("¿Qué es el Suplemento de la FEUM para establecimientos?", "Es la publicación de la Farmacopea de los Estados Unidos Mexicanos que fija las especificaciones y requisitos para el manejo, la distribución y la dispensación de medicamentos, dispositivos médicos y demás insumos para la salud en boticas, droguerías, farmacias y almacenes de depósito y distribución."),
+   ("¿Qué cambió en la edición 7.0?", "Se modificaron capítulos respecto a la sexta edición, entre ellos los requisitos de operación de boticas, droguerías y farmacias, los de almacenes de depósito y distribución, los procedimientos normalizados de operación, el control de existencias, el manejo y almacenamiento, la receta médica, el control de antimicrobianos y la gestión de residuos. El diagnóstico identifica cuáles de esos cambios le afectan."),
+   ("¿Cuándo entra en vigor?", "El aviso de la COFEPRIS publicado en el Diario Oficial de la Federación el 27 de noviembre de 2025 señala que entra en vigor a los 60 días naturales posteriores a su publicación."),
+   ("¿Mi establecimiento debe aplicarlo?", "Aplica a boticas, droguerías, farmacias y almacenes de depósito y distribución, según la actividad que realicen. Para saber con precisión qué le corresponde conviene revisar su caso en un diagnóstico y, si hace falta, con asesoría legal o regulatoria."),
+   ("¿Dónde se obtiene el Suplemento?", "Lo edita la Comisión Permanente de la Farmacopea de los Estados Unidos Mexicanos, que lo ofrece en versión impresa y electrónica."),
+  ],
+  related=["bpad", "capacitacion", "consultoria"]),
 
  dict(
   slug="capacitacion", icon="cap", tag="Formación", name="Capacitación",

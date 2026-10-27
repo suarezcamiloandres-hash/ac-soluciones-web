@@ -45,7 +45,7 @@
 
   // transición de página: cortina de 5 paneles con nombre de la sección
   const names = { 'index.html': 'Inicio', 'servicios.html': 'Servicios', 'como-trabajamos.html': 'Cómo trabajamos', 'nosotros.html': 'Nosotros', 'contacto.html': 'Contacto', 'blog.html': 'Blog',
-    'iso-9001.html': 'ISO 9001', 'iso-14001.html': 'ISO 14001', 'bpad.html': 'BPAD', 'capacitacion.html': 'Capacitación', 'consultoria.html': 'Consultoría',
+    'iso-9001.html': 'ISO 9001', 'iso-14001.html': 'ISO 14001', 'bpad.html': 'BPAD', 'farmacopea-feum.html': 'FEUM 7.0', 'capacitacion.html': 'Capacitación', 'consultoria.html': 'Consultoría',
     'iso-42001.html': 'ISO/IEC 42001', 'iso-27001.html': 'ISO/IEC 27001', 'gobernanza-datos.html': 'Gobernanza de datos' };
   const out = document.createElement('div'); out.className = 'page-out';
   out.innerHTML = '<div class="panels">' + '<i></i>'.repeat(5) + '</div><div class="pname"><span></span></div>';
