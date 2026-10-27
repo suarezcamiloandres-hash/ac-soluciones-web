@@ -276,3 +276,23 @@ SVC = [
   ],
   related=["iso-27001", "iso-42001", "consultoria"]),
 ]
+
+# Grupos de servicios (página de Servicios e inicio). Cada slug debe existir en SVC.
+GROUPS = [
+ dict(id="calidad-ambiente", title="Calidad y ambiente", icon="q",
+      head="Procesos que funcionan y una operación que cuida el ambiente",
+      blurb="Sistemas de gestión que ordenan su operación, reducen errores y controlan su impacto ambiental.",
+      slugs=["iso-9001", "iso-14001"]),
+ dict(id="industria-farmaceutica", title="Industria farmacéutica y salud", icon="med",
+      head="Cumplimiento sanitario para fabricantes, almacenes, distribuidores y farmacias",
+      blurb="Buenas prácticas, requisitos de la Farmacopea, autoridades de cinco países y validación de los sistemas que respaldan sus registros.",
+      slugs=["bpad", "farmacopea-feum", "cumplimiento-regulatorio", "validacion-software"]),
+ dict(id="seguridad-datos-ia", title="Seguridad, datos e inteligencia artificial", icon="lock",
+      head="Proteja su información y use la inteligencia artificial con reglas",
+      blurb="Sistemas de gestión para la seguridad de la información, el uso responsable de la IA y el gobierno de los datos.",
+      slugs=["iso-27001", "iso-42001", "gobernanza-datos"]),
+ dict(id="acompanamiento", title="Acompañamiento", icon="cap",
+      head="Capacitación y consultoría para cualquier norma",
+      blurb="Servicios transversales: sirven para implementar, mantener o auditar cualquiera de los sistemas anteriores.",
+      slugs=["capacitacion", "consultoria"]),
+]

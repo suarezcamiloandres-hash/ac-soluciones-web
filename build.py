@@ -21,7 +21,7 @@ def finish(html):
 
 shutil.rmtree(OUT, ignore_errors=True)
 shutil.copytree(ROOT / "assets", OUT / "assets")
-from services_content import SVC  # noqa: E402
+from services_content import SVC, GROUPS  # noqa: E402
 from blog_content import ARTICLES, CATS  # noqa: E402
 
 SITE = "https://acsgi.com.mx"
@@ -181,6 +181,38 @@ cycle = '''<div data-scroll data-scroll-speed="-2"><div class="cycle reveal zoom
 norms = ["ISO 9001", "ISO 14001", "BPAD", "FEUM 7.0", "COFEPRIS", "INVIMA", "ANVISA", "FDA", "GAMP 5", "ISO/IEC 27001", "ISO/IEC 42001", "NOM-059-SSA1-2015", "ISO/IEC 27701", "ISO/IEC 38505"]
 mq = "".join(f"<span>{n}</span>" for n in norms) * 2
 
+CHIP = {"gobernanza-datos": "Gobernanza de datos", "capacitacion": "Capacitación", "consultoria": "Asesoría y consultoría"}
+
+
+def gidx(g):
+    return [SLUGS.index(sl) for sl in g["slugs"]]
+
+
+def gcards():
+    out = []
+    for i, g in enumerate(GROUPS):
+        chips = "".join(f'<li>{CHIP.get(SLUGS[j], SERVICES[j][1])}</li>' for j in gidx(g))
+        out.append(f'<a class="gcard reveal d{(i % 2) + 1}" href="servicios.html#{g["id"]}"><span class="ico">{ICON[g["icon"]]}</span>'
+                   f'<h3>{g["title"]}</h3><p>{g["blurb"]}</p><ul>{chips}</ul><span class="go">Ver servicios <span>→</span></span></a>')
+    return "".join(out)
+
+
+def gnav():
+    links = "".join(f'<a href="#{g["id"]}">{g["title"]}</a>' for g in GROUPS)
+    return f'<section class="gnav-wrap"><div class="container"><nav class="gnav reveal in" aria-label="Grupos de servicios">{links}</nav></div></section>'
+
+
+def group_sections():
+    out = []
+    for n, g in enumerate(GROUPS):
+        cards = "".join(card(j, SERVICES[j]) for j in gidx(g))
+        cols = " g2" if len(g["slugs"]) in (2, 4) else ""
+        bg = ' style="background:#fff"' if n % 2 else ""
+        out.append(f'<section id="{g["id"]}"{bg}><div class="container"><span class="eyebrow reveal">{g["title"]}</span>'
+                   f'<h2 class="title reveal d1">{g["head"]}</h2><p class="lead reveal d2">{g["blurb"]}</p><div class="grid-3{cols}">{cards}</div></div></section>')
+    return "".join(out)
+
+
 index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, implementamos y auditamos sistemas de calidad, ambiente, buenas prácticas, ciberseguridad e inteligencia artificial.", "", [ORG]) + navbar("index.html") + f'''
 <section class="hero"><canvas data-net></canvas><div class="container"><div>
 <div class="chips" data-scroll data-scroll-speed="1"><span class="chip">ISO 9001</span><span class="chip">ISO 14001</span><span class="chip">BPAD</span><span class="chip">ISO/IEC 27001</span><span class="chip">ISO/IEC 42001</span></div>
@@ -199,7 +231,7 @@ index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, impl
 <section style="padding-top:20px"><div class="ghost" data-scroll data-scroll-speed="-4" aria-hidden="true">ISO</div><div class="container"><span class="eyebrow reveal">Servicios</span>
 <h2 class="title reveal d1">Un solo equipo para calidad, ambiente, buenas prácticas y tecnología</h2>
 <p class="lead reveal d2">Integramos las normas en un sistema que su personal entiende y usa todos los días, con o sin certificación.</p>
-<div class="grid-3">{"".join(card(i, s) for i, s in enumerate(SERVICES[:6]))}</div>
+<div class="ggrid">{gcards()}</div>
 <div style="text-align:center;margin-top:50px" class="reveal"><a class="btn btn-dark" href="servicios.html">Ver los 11 servicios <span class="arr">→</span></a></div></div></section>
 <section style="background:#fff;overflow:hidden"><div class="ghost r" data-scroll data-scroll-speed="3" aria-hidden="true">PHVA</div><div class="container"><span class="eyebrow reveal">Cómo trabajamos</span>
 <h2 class="title reveal d1">Cinco etapas, un entregable verificable en cada una</h2>{steps()}</div></section>
@@ -208,7 +240,7 @@ index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, impl
 # ---------------- servicios ----------------
 servicios = head("Servicios de sistemas de gestión ISO | AC Soluciones", "ISO 9001, ISO 14001, BPAD, ISO/IEC 27001, ISO/IEC 42001, capacitación, consultoría y gobernanza de datos.", "servicios.html") + navbar("servicios.html") + \
     page_hero("Servicios", "Un solo equipo para calidad, ambiente, buenas prácticas y tecnología", "Integramos las normas en un sistema que su personal entiende y usa todos los días, con o sin certificación.") + \
-    f'<section><div class="container"><div class="grid-3" style="margin-top:0">{"".join(card(i, s) for i, s in enumerate(SERVICES))}</div></div></section>' + cta() + footer()
+    gnav() + group_sections() + cta() + footer()
 
 # ---------------- como trabajamos ----------------
 como = head("Cómo trabajamos · AC Soluciones", "Cinco etapas con un entregable verificable en cada una: levantamiento, diagnóstico, documentación, capacitación y auditoría.", "como-trabajamos.html") + navbar("como-trabajamos.html") + \
@@ -225,7 +257,7 @@ nosotros = head("Nosotros · AC Soluciones", "Misión, visión y valores de AC S
 <span class="eyebrow reveal" style="margin-top:80px">Valores</span><h2 class="title reveal d1">Lo que nos guía</h2><div class="values">{vals}</div></div></section>''' + cta() + footer()
 
 # ---------------- contacto ----------------
-opts = "".join(f"<option>{s[1]} · {s[2]}</option>" for s in SERVICES)
+opts = "".join(f'<optgroup label="{g["title"]}">' + "".join(f"<option>{SERVICES[j][1]} · {SERVICES[j][2]}</option>" for j in gidx(g)) + "</optgroup>" for g in GROUPS)
 ph = "".join(f'<a class="phone reveal d{i+1}" href="tel:{p.replace(" ", "")}">{ICON["phone"]}<span>{p}<small>{"Colombia" if p.startswith("+57") else "México"}</small></span></a>' for i, p in enumerate(PHONES))
 contacto = head("Contacto · AC Soluciones", "Agende su diagnóstico inicial. Respondemos en un día hábil. Atención en México y Latinoamérica.", "contacto.html") + navbar("contacto.html") + \
     page_hero("Contacto", "Agende su <span class='grad-text'>diagnóstico inicial</span>", "Cuéntenos qué norma necesita cumplir y le respondemos en un día hábil. Atendemos empresas en México y Latinoamérica, en sitio o en línea.") + f'''

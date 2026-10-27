@@ -263,3 +263,23 @@ details.faq .ans{padding:0 24px 22px;animation:ansIn .4s ease}
 nav ul{gap:26px}
 nav a.link,nav .btn{white-space:nowrap}
 @media(max-width:1180px){nav ul{gap:18px}nav .btn{padding:12px 18px}.logo small{display:none}}
+
+/* ---- grupos de servicios ---- */
+.ggrid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:56px}
+.gcard{position:relative;display:flex;flex-direction:column;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:36px;transition:transform .35s,box-shadow .35s,border-color .35s}
+.gcard:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:rgba(20,184,166,.45)}
+.gcard .ico{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(20,184,166,.15),rgba(99,102,241,.15));display:grid;place-items:center;color:var(--teal);transition:transform .4s}
+.gcard:hover .ico{transform:rotate(-8deg) scale(1.1)}
+.gcard .ico svg{width:28px;height:28px}
+.gcard h3{font-size:1.45rem}
+.gcard ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;padding-top:16px;border-top:1px dashed var(--line)}
+.gcard li{font:500 .8rem Inter,sans-serif;background:var(--bg);padding:5px 12px;border-radius:999px;color:var(--text)}
+.gcard .go{margin-top:auto;padding-top:10px;font:600 .92rem Sora,sans-serif;color:var(--teal)}
+.gcard .go span{display:inline-block;transition:transform .25s}.gcard:hover .go span{transform:translateX(6px)}
+.gnav-wrap{padding:34px 0 0}
+.gnav{display:flex;flex-wrap:wrap;gap:10px}
+.gnav a{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:10px 20px;font:600 .88rem Sora,sans-serif;color:var(--ink);transition:.25s}
+.gnav a:hover{background:var(--navy);border-color:var(--navy);color:#fff;transform:translateY(-2px)}
+.grid-3.g2{grid-template-columns:repeat(2,1fr)}
+section[id]{scroll-margin-top:90px}
+@media(max-width:980px){.ggrid,.grid-3.g2{grid-template-columns:1fr}.gcard{padding:28px}}

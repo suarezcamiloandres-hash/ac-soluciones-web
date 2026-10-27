@@ -39,6 +39,11 @@
     addEventListener('scroll', () => paint(document.documentElement.scrollTop), { passive: true });
   }
   paint(0);
+  // llegar a una sección por ancla desde otra página (p. ej. servicios.html#industria-farmaceutica)
+  if (location.hash.length > 1) {
+    const go = () => { const t = $(location.hash); if (t) (loco ? loco.scrollTo(t, { offset: -80, duration: 900 }) : t.scrollIntoView({ behavior: 'smooth' })); };
+    addEventListener('load', () => setTimeout(go, 900));
+  }
 
   // mobile menu
   $('.burger')?.addEventListener('click', () => $('nav ul').classList.toggle('open'));
