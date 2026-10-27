@@ -23,6 +23,7 @@ shutil.rmtree(OUT, ignore_errors=True)
 shutil.copytree(ROOT / "assets", OUT / "assets")
 from services_content import SVC, GROUPS  # noqa: E402
 from blog_content import ARTICLES, CATS  # noqa: E402
+from story import story_section  # noqa: E402
 
 SITE = "https://acsgi.com.mx"
 TODAY = "2026-10-27"
@@ -214,7 +215,11 @@ def group_sections():
     return "".join(out)
 
 
-index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, implementamos y auditamos sistemas de calidad, ambiente, buenas prácticas, ciberseguridad e inteligencia artificial.", "", [ORG]) + navbar("index.html") + f'''
+CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>'
+STORY = story_section(ICON, CHECK_SVG)
+STORY_CSS = '<link rel="stylesheet" href="assets/story.css">'
+
+index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, implementamos y auditamos sistemas de calidad, ambiente, buenas prácticas, ciberseguridad e inteligencia artificial.", "", [ORG], css=STORY_CSS) + navbar("index.html") + f'''
 <section class="hero"><canvas data-net></canvas><div class="container"><div>
 <div class="chips" data-scroll data-scroll-speed="1"><span class="chip">ISO 9001</span><span class="chip">ISO 14001</span><span class="chip">BPAD</span><span class="chip">ISO/IEC 27001</span><span class="chip">ISO/IEC 42001</span></div>
 <h1 data-split>Sistemas de gestión que funcionan en la <span class="grad-text">operación,</span> no solo en el papel.</h1>
@@ -229,6 +234,7 @@ index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, impl
 <div class="stat reveal d4"><b data-count="1" data-suf=" día">0</b><span>hábil de respuesta</span></div></div></div></section>
 <section><div class="container"><div class="band reveal zoom"><div class="big" data-scroll data-scroll-speed="2">+16<small>años de experiencia</small></div>
 <div><h3>Personal calificado que conoce su operación desde dentro</h3><p>Especialistas en sistemas de gestión, auditoría y capacitación que han acompañado a empresas de industrias reguladas en cada etapa, del diagnóstico a la mejora continua.</p></div></div></div></section>
+{STORY}
 <section style="padding-top:20px"><div class="ghost" data-scroll data-scroll-speed="-4" aria-hidden="true">ISO</div><div class="container"><span class="eyebrow reveal">Servicios</span>
 <h2 class="title reveal d1">Un solo equipo para calidad, ambiente, buenas prácticas y tecnología</h2>
 <p class="lead reveal d2">Integramos las normas en un sistema que su personal entiende y usa todos los días, con o sin certificación.</p>

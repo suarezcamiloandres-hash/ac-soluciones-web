@@ -141,6 +141,21 @@
     })();
   });
 
+  // sección con panel fijo: la escena de la derecha cambia con el paso que se está leyendo
+  const story = $('#story');
+  if (story) {
+    const scenes = $$('.scene', story), copies = $$('.step-copy', story), dots = $$('.sdots i', story), panel = $('.story-panel', story);
+    const show = n => {
+      scenes.forEach((s, i) => s.classList.toggle('on', i === n));
+      copies.forEach((c, i) => c.classList.toggle('on', i === n));
+      dots.forEach((d, i) => d.classList.toggle('on', i === n));
+    };
+    const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) show(+e.target.dataset.scene); }), { rootMargin: innerWidth < 980 ? '-62% 0px -28% 0px' : '-42% 0px -42% 0px' });
+    copies.forEach(c => so.observe(c));
+    const fit = () => panel.style.setProperty('--sc', Math.min(1, panel.clientWidth / 570, panel.clientHeight / 530).toFixed(3));
+    fit(); addEventListener('resize', fit); new ResizeObserver(fit).observe(panel);
+  }
+
   // contact form -> correo
   const form = $('#contactForm');
   if (form) form.addEventListener('submit', async e => {
