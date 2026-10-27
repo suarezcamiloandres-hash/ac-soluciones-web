@@ -102,10 +102,10 @@ def scene_list(items, title="Avance por componente", count=None, label=ILUS, com
             f'<div class="cl-top pop" style="--i:0"><small>{title}</small>{right}</div><ul>{rows}</ul>{foot_html}</div></div></div>')
 
 
-def scene_flow(title, nodes, label, idx=2):
+def scene_flow(title, nodes, label, idx=2, marks=None):
     """Cadena vertical: nodes = lista de (nombre, descripción)."""
     rows = "".join(
-        f'<li class="fl pop" style="--i:{i + 1}"><span class="fl-n">{i + 1}</span><div><b>{n}</b><small>{d}</small></div></li>'
+        f'<li class="fl pop" style="--i:{i + 1}"><span class="fl-n">{marks[i] if marks else i + 1}</span><div><b>{n}</b><small>{d}</small></div></li>'
         for i, (n, d) in enumerate(nodes))
     return (f'<div class="scene s{idx}" data-i="{idx}">{_ex(label)}<div class="stage"><div class="flow">'
             f'<div class="cl-top pop" style="--i:0"><small>{title}</small></div><ol>{rows}</ol></div></div></div>')
@@ -132,10 +132,12 @@ def _components(x, idx=0):
     return scene_list(items, "Avance por componente", f"{len(items)} componentes", ILUS, first=True, idx=idx)
 
 
-def _step1(tag, kind="la norma"):
-    return ("Qué se trabaja", f"Cada componente de {tag}, con su avance visible",
-            f"Dividimos el servicio en los componentes que {kind} y los avanzamos uno a uno, para que sepa qué ya está, qué está en curso y qué necesita atención.",
-            "Solicitar diagnóstico", "contacto.html")
+def _step1(tag, kind="pide la norma"):
+    if kind == "pide la norma":
+        text = "Dividimos el servicio en los componentes que pide la norma y los avanzamos uno a uno, para que sepa qué ya está, qué está en curso y qué necesita atención."
+    else:
+        text = "Dividimos el trabajo en sus componentes y los avanzamos uno a uno, para que sepa qué ya está, qué está en curso y qué necesita atención."
+    return ("Qué se trabaja", f"Cada componente de {tag}, con su avance visible", text, "Solicitar diagnóstico", "contacto.html")
 
 
 STEP2 = ("Plan de trabajo", "Un entregable verificable en cada etapa",
@@ -155,6 +157,20 @@ BPAD_CHAIN = [("Proveedor", "Evaluado y con contrato de servicio"), ("Recepción
 VAL_CHAIN = [("Requerimientos del usuario (URS)", "Qué debe hacer el sistema"), ("Evaluación de riesgos", "Qué puede afectar la calidad y los datos"),
              ("Calificación de instalación (IQ)", "Instalado como se especificó"), ("Calificación de operación (OQ)", "Funciona según lo previsto"),
              ("Calificación de desempeño (PQ)", "Funciona de forma consistente en el uso real"), ("Informe y trazabilidad", "Cada requisito ligado a su prueba y su evidencia")]
+
+
+STEP1_NAME = {"capacitacion": "la capacitación", "consultoria": "la consultoría", "gobernanza-datos": "la gobernanza de datos"}
+
+CAPA_TOPICS = [("Interpretación de normas", "info", "A la medida"), ("Formación de auditores internos", "info", "A la medida"),
+               ("Buenas prácticas de distribución (BPD) y BPAD", "info", "A la medida"), ("Seguridad de la información", "info", "A la medida"),
+               ("Uso responsable de la inteligencia artificial", "info", "A la medida"), ("Los procedimientos de su empresa", "info", "A la medida")]
+
+CONS_CHAIN = [("Entender el hallazgo", "Requisito incumplido y evidencia observada"), ("Corregir", "Contener y resolver el caso concreto"),
+              ("Analizar la causa raíz", "Cinco porqués o diagrama de causa y efecto"), ("Definir la acción correctiva", "Qué cambia, quién es responsable y para cuándo"),
+              ("Implementar con evidencia", "Registros, capacitación y procedimientos actualizados"), ("Verificar la eficacia", "Que no se repita; después, cerrar")]
+
+ALCOA = [("Atribuible", "Se sabe quién lo registró y cuándo"), ("Legible", "Se puede leer y entender"), ("Contemporáneo", "Se registra en el momento en que ocurre"),
+         ("Original", "Es el primer registro o una copia verificada"), ("Exacto", "Refleja lo que realmente ocurrió")]
 
 
 def service_story(x, hl, icon, check):
@@ -185,11 +201,27 @@ def service_story(x, hl, icon, check):
                  "Montamos el sistema de gestión de calidad, los procedimientos y los registros que esperan COFEPRIS, INVIMA, el Ministerio de Salud de Panamá, ANVISA y la FDA, y lo comprobamos con auditorías internas antes de la inspección.",
                  "Ver validación de software", "servicios/validacion-software.html")
         scene3 = scene_hub(icon, AUTH_NODES, "Su sistema<br>de calidad", "Autoridades con las que trabajamos").replace('class="scene s0 on" data-i="0"', 'class="scene s2" data-i="2"')
+    elif slug == "capacitacion":
+        third = ("Temas", "Capacitación a la medida de su equipo",
+                 "Cursos de interpretación de normas, formación de auditores internos, buenas prácticas, seguridad de la información y uso responsable de la IA, presenciales o en línea, y capacitación en los procedimientos de su propia empresa. Entregamos constancias DC-3 en los cursos que lo requieren.",
+                 "Solicitar diagnóstico", "contacto.html")
+        scene3 = scene_list(CAPA_TOPICS, "Temas de capacitación", None, "Temas que impartimos", compact=True, idx=2,
+                            foot="Presenciales o en línea · Constancias DC-3")
+    elif slug == "consultoria":
+        third = ("Atención de hallazgos", "De un hallazgo de auditoría a su cierre, con evidencia",
+                 "Cuando una auditoría deja hallazgos, analizamos la causa, definimos la acción correctiva con responsable y fecha, la implementamos y verificamos que funcionó antes de cerrar. Todo el proceso queda documentado.",
+                 "Leer: cómo atender un hallazgo", "blog/como-atender-hallazgos-de-auditoria.html")
+        scene3 = scene_flow("Del hallazgo al cierre", CONS_CHAIN, "Pasos para cerrar un hallazgo")
+    elif slug == "gobernanza-datos":
+        third = ("Integridad de registros", "Registros confiables en los que se pueda apoyar una auditoría",
+                 "En entornos regulados, la evidencia de lo que se hizo debe ser fiable. Los principios ALCOA describen cómo: registros atribuibles, legibles, contemporáneos, originales y exactos. Los incorporamos en las políticas, los roles y los sistemas que generan sus datos.",
+                 "Ver validación de software", "servicios/validacion-software.html")
+        scene3 = scene_flow("Principios ALCOA", ALCOA, "Integridad de datos", marks=["A", "L", "C", "O", "A"])
     else:  # validacion-software
         third = ("Etapas de la validación", "De los requerimientos al informe, con trazabilidad",
                  "Definimos qué debe hacer el sistema, evaluamos sus riesgos y lo calificamos en instalación, operación y desempeño. Cada requisito queda ligado a una prueba y a su evidencia.",
                  "Ver cumplimiento regulatorio", "servicios/cumplimiento-regulatorio.html")
         scene3 = scene_flow("Validación de un sistema computarizado", VAL_CHAIN, "Etapas habituales (GAMP 5)")
 
-    steps = [_step1(tag, "pide el servicio"), STEP2, third]
+    steps = [_step1(STEP1_NAME.get(slug, tag), "otro"), STEP2, third]
     return _compose(steps, _components(x) + scene_dash() + scene3)
