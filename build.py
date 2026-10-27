@@ -218,7 +218,8 @@ def group_sections():
 CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>'
 STORY = story_section(ICON, CHECK_SVG)
 STORY_CSS = '<link rel="stylesheet" href="assets/story.css">'
-STORY_SERVICES = {"iso-9001": 0, "iso-14001": 1, "iso-27001": 2, "iso-42001": 3}  # columna de la norma que se resalta
+STORY_SERVICES = {"iso-9001": 0, "iso-14001": 1, "iso-27001": 2, "iso-42001": 3,  # columna de la norma que se resalta
+                  "bpad": None, "farmacopea-feum": None, "cumplimiento-regulatorio": None, "validacion-software": None}
 
 index = head("AC Soluciones · Sistemas de Gestión Integral", "Diseñamos, implementamos y auditamos sistemas de calidad, ambiente, buenas prácticas, ciberseguridad e inteligencia artificial.", "", [ORG], css=STORY_CSS) + navbar("index.html") + f'''
 <section class="hero"><canvas data-net></canvas><div class="container"><div>
